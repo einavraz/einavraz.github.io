@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>עינב רז — קורות חיים</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', Arial, 'Noto Sans Hebrew', sans-serif; background: #f0f2f5; color: #333; direction: rtl; }
+
+/* ── Header ─────────────────────────────────────── */
+header {
+    background: linear-gradient(135deg, #6a1b9a, #8e24aa, #ab47bc);
+    color: white;
+    padding: 30px 40px 0;
+}
+header h1 { font-size: 28px; font-weight: 300; letter-spacing: 1px; }
+header h1 span { font-weight: 600; }
+header p.subtitle { font-size: 14px; opacity: 0.8; margin-top: 4px; }
+
+/* ── Tabs ────────────────────────────────────────── */
+.tabs {
+    display: flex;
+    gap: 0;
+    margin-top: 20px;
+}
+.tab-btn {
+    padding: 12px 28px;
+    background: rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.7);
+    border: none;
+    border-radius: 8px 8px 0 0;
+    cursor: pointer;
+    font-size: 15px;
+    font-family: inherit;
+    transition: all 0.2s;
+}
+.tab-btn:hover {
+    background: rgba(255,255,255,0.2);
+    color: white;
+}
+.tab-btn.active {
+    background: #f0f2f5;
+    color: #6a1b9a;
+    font-weight: 600;
+}
+
+/* ── Tab Content ─────────────────────────────────── */
+.tab-content {
+    display: none;
+    padding: 30px 40px 60px;
+    max-width: 960px;
+    margin: 0 auto;
+    animation: fadeIn 0.3s ease;
+}
+.tab-content.active { display: block; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Resume Styles ───────────────────────────────── */
+.resume-section { margin-bottom: 28px; }
+.resume-section h2 {
+    font-size: 20px;
+    color: #6a1b9a;
+    border-bottom: 2px solid #ce93d8;
+    padding-bottom: 6px;
+    margin-bottom: 14px;
+}
+.resume-section h3 {
+    font-size: 16px;
+    color: #7b1fa2;
+    margin: 16px 0 6px;
+}
+.resume-section p, .resume-section li {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #444;
+}
+.resume-section ul {
+    margin-right: 20px;
+    margin-bottom: 10px;
+    list-style-position: inside;
+}
+.resume-section li { margin-bottom: 4px; }
+
+.job {
+    background: white;
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    border-right: 4px solid #8e24aa;
+}
+.job-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+}
+.job-title { font-size: 16px; font-weight: 600; color: #6a1b9a; }
+.job-duration { font-size: 13px; color: #888; font-style: italic; }
+.job-company { font-size: 14px; color: #555; margin-bottom: 6px; }
+.job p { font-size: 14px; color: #555; margin-bottom: 8px; }
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 14px;
+}
+.skill-card {
+    background: white;
+    border-radius: 10px;
+    padding: 16px 20px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+.skill-card h4 {
+    font-size: 14px;
+    color: #6a1b9a;
+    margin-bottom: 6px;
+}
+.skill-card p {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.6;
+}
+
+.education {
+    background: white;
+    border-radius: 10px;
+    padding: 18px 24px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    margin-bottom: 10px;
+}
+.education h4 { font-size: 15px; color: #6a1b9a; }
+.education p { font-size: 13px; color: #666; margin-top: 4px; }
+
+/* ── Contact Cards ───────────────────────────────── */
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+}
+.contact-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid #eee;
+}
+.contact-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    border-color: #ce93d8;
+}
+.contact-icon { font-size: 32px; flex-shrink: 0; }
+.contact-card h4 { font-size: 16px; color: #6a1b9a; margin-bottom: 4px; }
+.contact-card p { font-size: 13px; color: #888; }
+
+/* ── TBD Styles ──────────────────────────────────── */
+.tbd {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+.tbd-text { text-align: center; color: #bbb; }
+.tbd-text .icon { font-size: 48px; margin-bottom: 12px; }
+.tbd-text p { font-size: 18px; font-weight: 300; }
+
+/* ── Footer ──────────────────────────────────────── */
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #aaa;
+    font-size: 12px;
+}
+
+/* ── LTR for links ───────────────────────────────── */
+.ltr { direction: ltr; text-align: left; unicode-bidi: embed; }
+
+/* ── Responsive ──────────────────────────────────── */
+@media (max-width: 700px) {
+    header { padding: 20px 20px 0; }
+    .tab-btn { padding: 10px 16px; font-size: 13px; }
+    .tab-content { padding: 20px; }
+    .job-header { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<header>
+    <h1><span>עינב רז</span></h1>
+    <p class="subtitle">ביוטכנולוגיה | שירות לקוחות | מנהלת משרד</p>
+    <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab(0)">קורות חיים</button>
+        <button class="tab-btn" onclick="switchTab(1)">אודות</button>
+        <button class="tab-btn" onclick="switchTab(2)">יצירת קשר</button>
+    </div>
+</header>
+
+<!-- ═══════════════ כרטיסייה 1: קורות חיים ═══════════════ -->
+<div class="tab-content active" id="tab0">
+
+    <!-- פרופיל מקצועי -->
+    <div class="resume-section">
+        <h2>פרופיל מקצועי</h2>
+        <p>בוגרת לימודי הנדסאי ביוטכנולוגיה מתקדם עם 3 שנות ניסיון מעשי בעבודה במעבדה, לימוד נהלים של מעבדת ביוכימיה יישומית וניתוח/ניהול נתונים. בעלת ניסיון מגוון בשירות לקוחות וקמעונאות. נהנית לעבוד בסביבות קבוצתיות ולהעניק שירות איכותי.</p>
+    </div>
+
+    <!-- השכלה -->
+    <div class="resume-section">
+        <h2>השכלה</h2>
+
+        <div class="education">
+            <h4>תוכנית הכשרה תעסוקתית — ניצן כפר סבא</h4>
+            <p>פברואר 2026 — הווה</p>
+            <p>תוכנית הכשרה מקצועית לשילוב בשוק התעסוקה</p>
+        </div>
+
+        <div class="education">
+            <h4>מנהלת משרד כללי</h4>
+            <p>מכללת אלגונקוין, אוטווה, אונטריו, קנדה — נובמבר 2022 – אוגוסט 2023</p>
+        </div>
+
+        <div class="education">
+            <h4>הנדסאי ביוטכנולוגיה מתקדם</h4>
+            <p>מכללת אלגונקוין, אוטווה, אונטריו, קנדה — ספטמבר 2018 – אפריל 2022</p>
+            <p>דיפלומה מתקדמת, סיום יוני 2022</p>
+        </div>
+    </div>
+
+    <!-- ניסיון תעסוקתי -->
+    <div class="resume-section">
+        <h2>ניסיון תעסוקתי</h2>
+
+        <div class="job">
+            <div class="job-header">
+                <span class="job-title">עובדת קייטרינג במשרה חלקית</span>
+                <span class="job-duration">2025 (6 חודשים)</span>
+            </div>
+            <div class="job-company">מלון פרימה מילניום, רעננה, ישראל</div>
+            <ul>
+                <li>הגשת אוכל ושירות לאורחים באירועים במלון</li>
+                <li>עבודה במשמרות בשירותי קייטרינג</li>
+                <li>שמירה על רמת שירות גבוהה בסביבת עבודה דינמית</li>
+            </ul>
+        </div>
+
+        <div class="job">
+            <div class="job-header">
+                <span class="job-title">נציגת שירות לקוחות</span>
+                <span class="job-duration">אפריל 2021 – יולי 2024</span>
+            </div>
+            <div class="job-company">רונה / Lowe's — חנות צרכי בית, אוטווה</div>
+            <ul>
+                <li>קבלת לקוחות בנימוס להבטחת חוויית קניות נעימה</li>
+                <li>סיוע ללקוחות באיתור מוצרים על רצפת המכירות</li>
+                <li>שמירה על ידע מוצק על המוצרים ומענה מקצועי לשאלות לקוחות</li>
+                <li>סידור מלאי על רצפת המכירות בצורה מסודרת</li>
+                <li>ביצוע מדויק של פעולות קופה ותשלום</li>
+            </ul>
+        </div>
+
+        <div class="job">
+            <div class="job-header">
+                <span class="job-title">סטודנטית מכירות במשרה חלקית</span>
+                <span class="job-duration">יולי 2017</span>
+            </div>
+            <div class="job-company">חנות הספרים של מכללת אלגונקוין, אוטווה</div>
+            <ul>
+                <li>שיתוף פעולה עם חברי צוות לביצוע חובות שילוח וקבלה כולל ברקוד וסידור ספרים</li>
+                <li>ארגון מוצרים וסידור ספרים במקומות המתאימים</li>
+            </ul>
+        </div>
+
+        <div class="job">
+            <div class="job-header">
+                <span class="job-title">סטודנטית סיוע בפעילויות</span>
+                <span class="job-duration">אפריל – יוני 2017</span>
+            </div>
+            <div class="job-company">Y's Owl Maclure — מרכז לאנשים עם צרכים מיוחדים, אוטווה</div>
+            <ul>
+                <li>סיוע בלימוד וארגון הכיתות במרכז</li>
+                <li>סיוע בארגון טיולים ופעילויות חברתיות של הקבוצה</li>
+            </ul>
+        </div>
+
+        <div class="job">
+            <div class="job-header">
+                <span class="job-title">שותפת מעבדה — פרויקטים בביוטכנולוגיה</span>
+                <span class="job-duration">ספטמבר 2018 – אפריל 2022</span>
+            </div>
+            <div class="job-company">מכללת אלגונקוין, אוטווה</div>
+            <ul>
+                <li>עבודה צמודה עם שותפי מעבדה בפרויקטים אקדמיים וניסויים</li>
+                <li>פיתוח כישורי עבודת צוות ושיתוף פעולה</li>
+                <li>ביצוע מספר משימות במקביל תוך מתן עדיפויות לפרויקטים</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- מיומנויות -->
+    <div class="resume-section">
+        <h2>מיומנויות</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <h4>שפות</h4>
+                <p>אנגלית — מצוין<br>עברית — טוב</p>
+            </div>
+            <div class="skill-card">
+                <h4>מחשבים</h4>
+                <p>Outlook, Word, Excel, PowerPoint</p>
+            </div>
+            <div class="skill-card">
+                <h4>תכונות אישיות</h4>
+                <p>חרוצה, אמינה, תשומת לב לפרטים<br>דייקנית ואחראית<br>יכולת ללמוד תהליכים חדשים במהירות</p>
+            </div>
+            <div class="skill-card">
+                <h4>עבודת צוות ושירות</h4>
+                <p>כישורי תקשורת ובינאישיות מפותחים<br>שיתוף פעולה גבוה עם עמיתים<br>התנהלות יעילה מול לקוחות<br>עבודה עם פיקוח מינימלי</p>
+            </div>
+            <div class="skill-card">
+                <h4>ניסיון מעבדה</h4>
+                <p>3 שנות ניסיון מעשי במעבדה רטובה<br>נהלי מעבדת ביוכימיה יישומית<br>ניתוח וניהול נתונים<br>בקרת איכות</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- ═══════════════ כרטיסייה 2: אודות ═══════════════ -->
+<div class="tab-content" id="tab1">
+    <div class="tbd">
+        <div class="tbd-text">
+            <div class="icon">🚧</div>
+            <p>בקרוב...</p>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════ כרטיסייה 3: יצירת קשר ═══════════════ -->
+<div class="tab-content" id="tab2">
+
+    <div class="resume-section">
+        <h2>יצירת קשר</h2>
+        <p style="font-size:15px; color:#555; margin-bottom:24px;">
+            מוזמנים ליצור קשר — בין אם מדובר בהצעות עבודה, שיתופי פעולה, או סתם לומר שלום.
+        </p>
+
+        <div class="contact-grid">
+            <a class="contact-card" href="mailto:razeinav@yahoo.ca">
+                <div class="contact-icon">✉️</div>
+                <div>
+                    <h4>דוא"ל</h4>
+                    <p class="ltr">razeinav@yahoo.ca</p>
+                </div>
+            </a>
+
+            <a class="contact-card" href="https://github.com/einavraz" target="_blank">
+                <div class="contact-icon">🐙</div>
+                <div>
+                    <h4>GitHub</h4>
+                    <p class="ltr">github.com/einavraz</p>
+                </div>
+            </a>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    &copy; 2026 עינב רז
+</footer>
+
+<script>
+function switchTab(index) {
+    document.querySelectorAll('.tab-btn').forEach((btn, i) => {
+        btn.classList.toggle('active', i === index);
+    });
+    document.querySelectorAll('.tab-content').forEach((content, i) => {
+        content.classList.toggle('active', i === index);
+    });
+}
+</script>
+
+</body>
+</html>
